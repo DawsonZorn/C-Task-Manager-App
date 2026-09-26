@@ -143,3 +143,4 @@ C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\TaskManager.Api.pdb
 C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\TaskManager.Api.genruntimeconfig.cache
 C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\ref\TaskManager.Api.dll
 C:\Users\dawso\C# Projects\TaskManager.Api\bin\Debug\net9.0\Scalar.AspNetCore.dll
+C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\TaskManager.Api.sourcelink.json
