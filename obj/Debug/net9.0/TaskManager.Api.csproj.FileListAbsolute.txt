@@ -144,3 +144,4 @@ C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\TaskManager.Api.genr
 C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\ref\TaskManager.Api.dll
 C:\Users\dawso\C# Projects\TaskManager.Api\bin\Debug\net9.0\Scalar.AspNetCore.dll
 C:\Users\dawso\C# Projects\TaskManager.Api\obj\Debug\net9.0\TaskManager.Api.sourcelink.json
+C:\Users\dawso\C# Projects\TaskManager.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
