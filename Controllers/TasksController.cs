@@ -35,4 +35,23 @@ public class TasksController : ControllerBase
     await _db.SaveChangesAsync();
     return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
   }
+
+  [HttpPut("{id}")]
+  public async Task<IActionResult> Update(int id, TaskItem task)
+  {
+    if (id != task.Id) return BadRequest();
+    _db.Entry(task).State = EntityState.Modified;
+    await _db.SaveChangesAsync();
+    return NoContent();
+  }
+
+  [HttpDelete("{id}")]
+  public async Task<IActionResult> Delete(int id)
+  {
+    var task = await _db.Tasks.FindAsync(id);
+    if (task is null) return NotFound();
+    _db.Tasks.Remove(task);
+    await _db.SaveChangesAsync();
+    return NoContent();
+  }
 }
