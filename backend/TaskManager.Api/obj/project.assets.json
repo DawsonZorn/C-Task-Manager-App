@@ -3223,11 +3223,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dawso\\C# Projects\\TaskManager\\backend\\TaskManager.Api\\TaskManager.Api.csproj",
+      "projectUniqueName": "C:\\Users\\dawso\\C Sharp Projects\\TaskManager\\backend\\TaskManager.Api\\TaskManager.Api.csproj",
       "projectName": "TaskManager.Api",
-      "projectPath": "C:\\Users\\dawso\\C# Projects\\TaskManager\\backend\\TaskManager.Api\\TaskManager.Api.csproj",
+      "projectPath": "C:\\Users\\dawso\\C Sharp Projects\\TaskManager\\backend\\TaskManager.Api\\TaskManager.Api.csproj",
       "packagesPath": "C:\\Users\\dawso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dawso\\C# Projects\\TaskManager\\backend\\TaskManager.Api\\obj\\",
+      "outputPath": "C:\\Users\\dawso\\C Sharp Projects\\TaskManager\\backend\\TaskManager.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
