@@ -4,6 +4,13 @@ A full-stack task management web app built with **C# / ASP.NET Core** and **Reac
 
 I built this project to practise how a typical business application fits together, from the database through the API to the user interface.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/main.png" alt="Task list" width="48%" />
+  <img src="docs/screenshots/editing.png" alt="Editing a task" width="48%" />
+</p>
+
 ## Features
 
 - **Create tasks** with a title, optional description and optional due date
@@ -14,13 +21,13 @@ I built this project to practise how a typical business application fits togethe
 
 ## Tech Stack
 
-| Layer    | Technology                                            |
-| -------- | ----------------------------------------------------- |
-| Backend  | C#, .NET 9, ASP.NET Core Web API                      |
+| Layer    | Technology                                             |
+| -------- | ------------------------------------------------------ |
+| Backend  | C#, .NET 9, ASP.NET Core Web API                       |
 | Data     | Entity Framework Core 9, SQLite, code-first migrations |
-| API docs | OpenAPI + Swagger UI                                  |
-| Frontend | React 19, TypeScript, Vite                            |
-| Tooling  | Git, ESLint, VS Code                                  |
+| API docs | OpenAPI + Swagger UI                                   |
+| Frontend | React 19, TypeScript, Vite                             |
+| Tooling  | Git, ESLint, VS Code                                   |
 
 ## Skills Demonstrated
 
@@ -80,13 +87,13 @@ Open http://localhost:5173 in your browser.
 
 ## API Endpoints
 
-| Method | Route             | Description      |
-| ------ | ----------------- | ---------------- |
-| GET    | `/api/tasks`      | List all tasks   |
-| GET    | `/api/tasks/{id}` | Get one task     |
-| POST   | `/api/tasks`      | Create a task    |
-| PUT    | `/api/tasks/{id}` | Update a task    |
-| DELETE | `/api/tasks/{id}` | Delete a task    |
+| Method | Route             | Description    |
+| ------ | ----------------- | -------------- |
+| GET    | `/api/tasks`      | List all tasks |
+| GET    | `/api/tasks/{id}` | Get one task   |
+| POST   | `/api/tasks`      | Create a task  |
+| PUT    | `/api/tasks/{id}` | Update a task  |
+| DELETE | `/api/tasks/{id}` | Delete a task  |
 
 Example task:
 
