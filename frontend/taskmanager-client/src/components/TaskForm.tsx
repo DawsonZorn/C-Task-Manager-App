@@ -20,7 +20,7 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
         title,
         description,
         isCompleted: false,
-        dueDate: dueDate || null, // empty string would fail to bind to DateTime? on the backend
+        dueDate: dueDate || null, // empty string would fail to bind to DateTime on the backend
       }),
     });
     const newTask = await response.json();
@@ -32,7 +32,7 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
 
   return (
     // form for creating a new task
-    <form onSubmit={handleSubmit}>
+    <form className="task-form" onSubmit={handleSubmit}>
       {" "}
       <input
         value={title}

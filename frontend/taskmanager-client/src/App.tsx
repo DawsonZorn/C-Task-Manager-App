@@ -1,44 +1,46 @@
 import { useEffect, useState } from "react";
 import type { Task } from "./types/Tasks";
+import { getTasks, updateTask, deleteTask } from "./api/tasks";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TasksList";
+import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5292/api/tasks")
-      .then((res) => res.json())
-      .then((data) => setTasks(data));
+    getTasks().then(setTasks).catch(console.error);
   }, []);
 
   function handleTaskCreated(newTask: Task) {
-    setTasks([...tasks, newTask]);
+    setTasks((prev) => [...prev, newTask]);
   }
 
-  async function handleToggleComplete(task: Task) {
-    const updated = { ...task, isCompleted: !task.isCompleted };
+  async function handleUpdate(updated: Task) {
+    await updateTask(updated);
+    setTasks((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
+  }
 
-    await fetch(`http://localhost:5292/api/tasks/${task.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updated),
-    });
+  function handleToggleComplete(task: Task) {
+    return handleUpdate({ ...task, isCompleted: !task.isCompleted });
+  }
 
-    setTasks(tasks.map((t) => (t.id === task.id ? updated : t)));
+  async function handleDelete(id: number) {
+    await deleteTask(id);
+    setTasks((prev) => prev.filter((t) => t.id !== id));
   }
 
   return (
-    <>
-      <header>
-        <h1>To Do List Task Tracker</h1>
-      </header>
+    <main className="container">
+      <h1>Task Manager</h1>
       <TaskForm onTaskCreated={handleTaskCreated} />
       <TaskList
-        tasks={tasks.filter((t) => !t.isCompleted)} // hide completed tasks
+        tasks={tasks}
         onToggleComplete={handleToggleComplete}
+        onUpdate={handleUpdate}
+        onDelete={handleDelete}
       />
-    </>
+    </main>
   );
 }
 

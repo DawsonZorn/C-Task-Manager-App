@@ -11,7 +11,9 @@ function EditTaskForm({ task, onSave, onCancel }: EditTaskFormProps) {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description ?? "");
   const [dueDate, setDueDate] = useState(task.dueDate?.slice(0, 16) ?? "");
-
+  const [updatedAt, setUpdatedAt] = useState(
+    task.updatedAt?.slice(0, 16) ?? "",
+  );
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     onSave({
