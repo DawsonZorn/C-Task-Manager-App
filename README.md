@@ -6,10 +6,9 @@ I built this project to practise how a typical business application fits togethe
 
 ## Screenshots
 
-<p align="center">
-  <img src="docs/main.png" alt="Task list" width="48%" />
-  <img src="docs/editing.png" alt="Editing a task" width="48%" />
-</p>
+![Task list with active and completed tasks](docs/main.png)
+
+![Editing a task inline](docs/editing.png)
 
 ## Features
 
