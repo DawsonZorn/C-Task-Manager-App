@@ -7,8 +7,8 @@ I built this project to practise how a typical business application fits togethe
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/main.png" alt="Task list" width="48%" />
-  <img src="docs/screenshots/editing.png" alt="Editing a task" width="48%" />
+  <img src="docs/main.png" alt="Task list" width="48%" />
+  <img src="docs/editing.png" alt="Editing a task" width="48%" />
 </p>
 
 ## Features
