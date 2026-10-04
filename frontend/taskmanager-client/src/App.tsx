@@ -17,7 +17,6 @@ function App() {
   }
 
   async function handleToggleComplete(task: Task) {
-    // PUT expects the full task, so send it back with isCompleted flipped
     const updated = { ...task, isCompleted: !task.isCompleted };
 
     await fetch(`http://localhost:5292/api/tasks/${task.id}`, {
@@ -31,6 +30,9 @@ function App() {
 
   return (
     <>
+      <header>
+        <h1>To Do List Task Tracker</h1>
+      </header>
       <TaskForm onTaskCreated={handleTaskCreated} />
       <TaskList
         tasks={tasks.filter((t) => !t.isCompleted)} // hide completed tasks

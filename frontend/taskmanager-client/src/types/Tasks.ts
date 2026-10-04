@@ -1,8 +1,9 @@
 export interface Task {
   id: number;
   title: string;
-  description?: string;
+  description?: string | null;
   isCompleted: boolean;
   createdAt: string;
-  dueDate?: string;
+  updatedAt?: string | null;
+  dueDate?: string | null;
 }
