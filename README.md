@@ -61,6 +61,8 @@ TaskManager/
 
 ```bash
 cd backend/TaskManager.Api
+dotnet tool install --global dotnet-ef   # one-time setup
+dotnet ef database update                # creates tasks.db from the migrations
 dotnet run --launch-profile http
 ```
 
