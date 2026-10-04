@@ -1,57 +1,72 @@
-# TaskManager
+# Task Manager
 
-A full-stack task manager: an ASP.NET Core Web API backed by SQLite, and a React + TypeScript frontend built with Vite.
+A full-stack task management web app built with **C# / ASP.NET Core** and **React + TypeScript**. Users can create, edit, complete and delete tasks. Tasks are stored in a SQLite database through a RESTful API.
+
+I built this project to practise how a typical business application fits together, from the database through the API to the user interface.
+
+## Features
+
+- **Create tasks** with a title, optional description and optional due date
+- **Edit tasks** inline without leaving the page
+- **Mark tasks complete** with a checkbox. Completed tasks move into a collapsible "Completed" section
+- **Delete tasks**
+- **Saved data**: every change is stored in a SQLite database through the API
 
 ## Tech Stack
 
-| Layer    | Technology                                              |
-| -------- | ------------------------------------------------------- |
-| Backend  | .NET 9, ASP.NET Core Web API, Entity Framework Core 9   |
-| Database | SQLite                                                  |
-| API docs | OpenAPI + Swagger UI (Development only)                 |
-| Frontend | React 19, TypeScript, Vite                              |
+| Layer    | Technology                                            |
+| -------- | ----------------------------------------------------- |
+| Backend  | C#, .NET 9, ASP.NET Core Web API                      |
+| Data     | Entity Framework Core 9, SQLite, code-first migrations |
+| API docs | OpenAPI + Swagger UI                                  |
+| Frontend | React 19, TypeScript, Vite                            |
+| Tooling  | Git, ESLint, VS Code                                  |
+
+## Skills Demonstrated
+
+- **REST API design**: CRUD endpoints with appropriate HTTP verbs and status codes (`200`, `201`, `204`, `400`, `404`)
+- **Database work**: a data model defined in C#, with the schema managed through EF Core migrations
+- **Layered backend**: separate Models, Data (DbContext) and Controllers, with dependency injection for the database context
+- **Frontend development**: reusable typed React components, state management with hooks, and a separate API client module
+- **Integration**: frontend and backend connected over HTTP, with CORS configured for the client origin
+- **Version control**: built step by step with Git, starting as a monorepo with `backend/` and `frontend/` folders
 
 ## Project Structure
 
 ```
 TaskManager/
-├── backend/
-│   └── TaskManager.Api/
-│       ├── Controllers/TasksController.cs   # CRUD endpoints for /api/tasks
-│       ├── Data/AppDbContext.cs             # EF Core DbContext
-│       ├── Models/TaskItem.cs               # Task entity
-│       ├── Migrations/                      # EF Core migrations
-│       ├── Program.cs                       # Service registration, CORS, middleware
-│       └── appsettings.json                 # SQLite connection string
-└── frontend/
-    └── taskmanager-client/
-        └── src/
-            ├── App.tsx                      # Fetches and lists tasks
-            └── types/Tasks.ts               # Task TypeScript interface
+├── backend/TaskManager.Api/
+│   ├── Controllers/TasksController.cs   # CRUD endpoints for /api/tasks
+│   ├── Data/AppDbContext.cs             # EF Core database context
+│   ├── Models/TaskItem.cs               # Task entity
+│   ├── Migrations/                      # Database schema history
+│   └── Program.cs                       # Services, CORS, middleware
+└── frontend/taskmanager-client/src/
+    ├── api/tasks.ts                     # Functions that call the API
+    ├── components/
+    │   ├── TaskForm.tsx                 # Form for adding a new task
+    │   ├── TasksList.tsx                # Active list + collapsible completed list
+    │   ├── TaskItem.tsx                 # A single task row
+    │   ├── EditTaskForm.tsx             # Inline edit form
+    │   └── CheckBox.tsx                 # Completion checkbox
+    ├── types/Tasks.ts                   # Task TypeScript interface
+    └── App.tsx                          # Holds app state and wires components together
 ```
 
-## Prerequisites
+## Running Locally
 
-- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [Node.js](https://nodejs.org/) 20+ and npm
-- (Optional) EF Core CLI for running migrations: `dotnet tool install --global dotnet-ef`
+**Prerequisites:** [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0), [Node.js](https://nodejs.org/) 20+
 
-## Getting Started
-
-### 1. Run the backend
+**1. Start the API**
 
 ```bash
 cd backend/TaskManager.Api
-dotnet restore
-dotnet ef database update   # creates/updates tasks.db (optional if tasks.db already exists)
 dotnet run --launch-profile http
 ```
 
-The API runs at **http://localhost:5292**. In Development, Swagger UI is available at http://localhost:5292/swagger.
+The API runs at http://localhost:5292. Swagger UI is at http://localhost:5292/swagger.
 
-### 2. Run the frontend
-
-In a second terminal:
+**2. Start the frontend** (in a second terminal)
 
 ```bash
 cd frontend/taskmanager-client
@@ -59,80 +74,34 @@ npm install
 npm run dev
 ```
 
-The app runs at **http://localhost:5173** and fetches tasks from the backend. The backend's CORS policy only allows this origin, so keep the default Vite port.
+Open http://localhost:5173 in your browser.
 
-## API Reference
+## API Endpoints
 
-Base URL: `http://localhost:5292/api/tasks`
+| Method | Route             | Description      |
+| ------ | ----------------- | ---------------- |
+| GET    | `/api/tasks`      | List all tasks   |
+| GET    | `/api/tasks/{id}` | Get one task     |
+| POST   | `/api/tasks`      | Create a task    |
+| PUT    | `/api/tasks/{id}` | Update a task    |
+| DELETE | `/api/tasks/{id}` | Delete a task    |
 
-| Method | Route             | Description        | Success response  |
-| ------ | ----------------- | ------------------ | ----------------- |
-| GET    | `/api/tasks`      | List all tasks     | `200 OK`          |
-| GET    | `/api/tasks/{id}` | Get a task by ID   | `200 OK` / `404`  |
-| POST   | `/api/tasks`      | Create a task      | `201 Created`     |
-| PUT    | `/api/tasks/{id}` | Update a task      | `204 No Content` / `400` if IDs differ |
-| DELETE | `/api/tasks/{id}` | Delete a task      | `204 No Content` / `404` |
-
-### Task model
+Example task:
 
 ```json
 {
   "id": 1,
-  "title": "Buy groceries",
-  "description": "Milk, eggs, bread",
+  "title": "Submit timesheet",
+  "description": "Due end of pay period",
   "isCompleted": false,
   "createdAt": "2026-09-24T15:38:30Z",
-  "dueDate": "2026-09-30T00:00:00Z"
+  "dueDate": "2026-09-30T17:00:00Z"
 }
 ```
 
-| Field         | Type      | Notes                                  |
-| ------------- | --------- | -------------------------------------- |
-| `id`          | int       | Assigned by the database               |
-| `title`       | string    | Required                               |
-| `description` | string?   | Optional                               |
-| `isCompleted` | bool      | Defaults to `false`                    |
-| `createdAt`   | DateTime  | Defaults to the current UTC time       |
-| `dueDate`     | DateTime? | Optional                               |
+## Possible Improvements
 
-### Example requests
-
-```bash
-# Create a task
-curl -X POST http://localhost:5292/api/tasks \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Buy groceries", "description": "Milk, eggs, bread"}'
-
-# Mark it complete (the id in the body must match the URL)
-curl -X PUT http://localhost:5292/api/tasks/1 \
-  -H "Content-Type: application/json" \
-  -d '{"id": 1, "title": "Buy groceries", "isCompleted": true}'
-
-# Delete it
-curl -X DELETE http://localhost:5292/api/tasks/1
-```
-
-You can also send requests from [TaskManager.Api.http](backend/TaskManager.Api/TaskManager.Api.http) in VS Code (REST Client) or Visual Studio.
-
-## Database
-
-The SQLite database file is `backend/TaskManager.Api/tasks.db`, configured via `ConnectionStrings:DefaultConnection` in [appsettings.json](backend/TaskManager.Api/appsettings.json).
-
-After changing a model, add and apply a migration:
-
-```bash
-cd backend/TaskManager.Api
-dotnet ef migrations add <MigrationName>
-dotnet ef database update
-```
-
-## Frontend Scripts
-
-Run from `frontend/taskmanager-client`:
-
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Start the Vite dev server            |
-| `npm run build`   | Type-check and build for production  |
-| `npm run preview` | Preview the production build         |
-| `npm run lint`    | Run ESLint                           |
+- Add user accounts and authentication
+- Add server-side validation and unit tests for the API
+- Add filtering and sorting by due date
+- Deploy to Azure, with the database moved to SQL Server
