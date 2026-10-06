@@ -40,6 +40,7 @@ public class TasksController : ControllerBase
   public async Task<IActionResult> Update(int id, TaskItem task)
   {
     if (id != task.Id) return BadRequest();
+    if (!await _db.Tasks.AnyAsync(t => t.Id == id)) return NotFound();
     _db.Entry(task).State = EntityState.Modified;
     await _db.SaveChangesAsync();
     return NoContent();

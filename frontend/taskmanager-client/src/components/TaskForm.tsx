@@ -38,6 +38,7 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        required
       />
       <input
         value={description}

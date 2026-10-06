@@ -6,10 +6,9 @@ I built this project to practise how a typical business application fits togethe
 
 ## Screenshots
 
-<p align="center">
-  <img src="docs/main.png" alt="Task list" width="48%" />
-  <img src="docs/editing.png" alt="Editing a task" width="48%" />
-</p>
+![Task list with active and completed tasks](docs/main.png)
+
+![Editing a task inline](docs/editing.png)
 
 ## Features
 
@@ -87,13 +86,13 @@ Open http://localhost:5173 in your browser.
 
 ## API Endpoints
 
-| Method | Route             | Description    |
-| ------ | ----------------- | -------------- |
-| GET    | `/api/tasks`      | List all tasks |
-| GET    | `/api/tasks/{id}` | Get one task   |
-| POST   | `/api/tasks`      | Create a task  |
-| PUT    | `/api/tasks/{id}` | Update a task  |
-| DELETE | `/api/tasks/{id}` | Delete a task  |
+| Method | Route             | Description    | Responses                                                  |
+| ------ | ----------------- | -------------- | ---------------------------------------------------------- |
+| GET    | `/api/tasks`      | List all tasks | `200 OK`                                                   |
+| GET    | `/api/tasks/{id}` | Get one task   | `200 OK`, `404 Not Found`                                  |
+| POST   | `/api/tasks`      | Create a task  | `201 Created`, `400 Bad Request` if the title is missing   |
+| PUT    | `/api/tasks/{id}` | Update a task  | `204 No Content`, `400` if the IDs differ, `404 Not Found` |
+| DELETE | `/api/tasks/{id}` | Delete a task  | `204 No Content`, `404 Not Found`                          |
 
 Example task:
 
